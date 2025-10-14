@@ -29,21 +29,21 @@ const Reasons = () => {
     ]
 
     return (
-        <div className="mt-5">
-            <div className="font-bold text-2xl mb-5">
+        <div className="mt-5 px-4 md:px-0">
+            <div className="font-bold text-xl md:text-2xl mb-5 text-center md:text-left">
                 More reasons to join
             </div>
-            <div className="flex gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                 {reasons.map((reason,index) => {
                     return(
-                        <div className="w-[300px] h-[320px] p-5 rounded-2xl bg-gradient-to-b from-blue-950 to-gray-900 relative">
-                            <div className="font-bold text-[22px]">
+                        <div key={index} className="w-full h-[200px] md:h-[320px] p-4 md:p-5 rounded-2xl bg-gradient-to-b from-blue-950 to-gray-900 relative hover:scale-105 transition-transform duration-300">
+                            <div className="font-bold text-lg md:text-[22px]">
                                 {reason.title}
                             </div>
-                            <div className="py-5 text-gray-400 text-[16px] ">
+                            <div className="py-3 md:py-5 text-gray-400 text-sm md:text-[16px]">
                                 {reason.detail}
                             </div>
-                            <div className="text-7xl right-0 mr-10 absolute opacity-60 bottom-0 mb-5">
+                            <div className="text-5xl md:text-7xl right-0 mr-4 md:mr-10 absolute opacity-60 bottom-0 mb-4 md:mb-5">
                                 {reason.icon}
                             </div>
                         </div>
@@ -52,7 +52,6 @@ const Reasons = () => {
             </div>
         </div>
     )
-
 }
 
 export default Reasons

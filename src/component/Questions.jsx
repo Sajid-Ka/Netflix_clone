@@ -2,7 +2,6 @@ import { useState } from "react"
 import { RxCross2 } from "react-icons/rx";
 import { GoPlus } from "react-icons/go";
 
-
 const Questions = () => {
     const [activeIndex,setActiveIndex] = useState(null);
     const questionAns = [
@@ -28,7 +27,7 @@ const Questions = () => {
         },
         {
             question : "Is Netflix good for kids?",
-            answer : "The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and films in their own space. Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see."
+            answer : "The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and films in their own space. Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don't want kids to see."
         },
     ]
 
@@ -37,22 +36,25 @@ const Questions = () => {
     }
 
     return (
-        <div className="py-10 h-screen">
-            <div className="text-2xl font-bold">
+        <div className="py-10 min-h-screen px-4 md:px-0">
+            <div className="text-xl md:text-2xl font-bold text-center md:text-left mb-6">
                 Frequently Asked Questions
             </div>
             {questionAns.map((item,index) => {
                 return (
-                    <div key={index}>
-                        <div onClick={() => handleToggle(index)} className="text-2xl bg-gray-800 p-3 flex items-center justify-between px-10 mt-3 cursor-pointer">
-                            <div>
+                    <div key={index} className="mb-2">
+                        <div 
+                            onClick={() => handleToggle(index)} 
+                            className="text-base md:text-xl bg-gray-800 p-3 md:p-4 flex items-center justify-between px-4 md:px-10 mt-2 md:mt-1 cursor-pointer hover:bg-gray-700 transition-colors"
+                        >
+                            <div className="pr-4">
                                 {item.question}
                             </div>
-                            <div className="text-5xl font-thin duration-500">
+                            <div className="text-2xl md:text-4xl font-thin duration-500 flex-shrink-0">
                                 {activeIndex === index ? <RxCross2 /> : <GoPlus />}
                             </div>
                         </div>
-                        <div className={`bg-gray-800 text-xl overflow-hidden ${activeIndex === index ? "max-h-[500px]" : "max-h-0"} duration-500 px-5 mt-1`}>
+                        <div className={`bg-gray-800 text-sm md:text-base overflow-hidden ${activeIndex === index ? "max-h-[500px] p-4 md:px-5" : "max-h-0"} duration-500 mt-1`}>
                             {item.answer}
                         </div>
                     </div>
