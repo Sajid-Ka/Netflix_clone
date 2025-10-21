@@ -7,7 +7,7 @@ const Trends = () => {
     const [movies,setMovies] = useState([]);
     const [selectedMovieDetails, setSelectedMovieDetails] = useState(null);
 
-    const apiKey = process.env.REACT_APP_TMDB_API_KEY;
+    const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`)

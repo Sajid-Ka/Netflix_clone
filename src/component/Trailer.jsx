@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { RxArrowLeft } from "react-icons/rx";
 
-const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;;
 
 const Trailer = () => {
   const { id } = useParams();
