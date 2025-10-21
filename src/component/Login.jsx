@@ -12,7 +12,7 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Firebase error mapping to user-friendly messages
+
   const getFirebaseErrorMessage = (error) => {
     switch (error.code) {
       case 'auth/invalid-credential':

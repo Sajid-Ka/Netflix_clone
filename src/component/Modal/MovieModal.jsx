@@ -1,6 +1,13 @@
 import { RxCross2 } from "react-icons/rx";
+import { useAuth } from "../Context/AuthContext";
+import { useWatchlist } from "../Context/WatchlistContext";
+import { useNavigate } from "react-router-dom";
 
 const MovieModal = ({ details, onClose }) => {
+  const {currentUser} = useAuth();
+  const {addMovie, removeMovie, isInWatchlist} = useWatchlist();
+  const navigate = useNavigate();
+
   if (!details) return null;
 
   const handleOutsideClick = (e) => {
@@ -8,6 +15,29 @@ const MovieModal = ({ details, onClose }) => {
       onClose();
     }
   };
+
+  const inWatchlist = isInWatchlist(details.id);
+
+  const handleWatchlistToggle = async () => {
+    if(!currentUser) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      if(inWatchlist){
+        await removeMovie(details.id);
+      }else {
+        await addMovie(details);
+      }
+    } catch (error) {
+      console.error("Watchlist action failed : ", err)
+    }
+  }
+
+  const handleTrailer = () => {
+    navigate(`/trailer/${details.id}`);
+  }
 
   const maturityRating = details.adult ? "A" : "U/A";
   const year = details.release_date ? details.release_date.slice(0, 4) : "N/A";
@@ -47,8 +77,22 @@ const MovieModal = ({ details, onClose }) => {
 
         <p className="px-4 pb-4 text-gray-300">{details.overview}</p>
 
-        <div className="px-4 pb-6">
-          <button className="bg-red-600 text-white px-6 py-3 rounded font-bold w-full md:w-auto transition-colors duration-200 hover:bg-red-700">
+        <div className="px-4 pb-6 grid gap-3 md:flex md:items-center md:gap-4">
+          <button
+            onClick={handleWatchlistToggle}
+            className="bg-red-600 text-white px-6 py-3 rounded font-bold w-full md:w-auto transition-colors duration-200 hover:bg-red-700"
+          >
+            {inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+          </button>
+
+          <button
+            onClick={() => navigate(`/trailer/${details.id}`)}
+            className="bg-red-600 text-white px-6 py-3 rounded font-bold w-full md:w-auto transition-colors duration-200 hover:bg-gray-600"
+          >
+            Watch Trailer
+          </button>
+
+          <button className="bg-red-600 text-white px-6 py-3 rounded font-bold w-full md:w-auto transition-colors duration-200 hover:bg-gray-700">
             Get Started
           </button>
         </div>

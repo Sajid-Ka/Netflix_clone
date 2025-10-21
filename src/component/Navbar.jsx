@@ -12,13 +12,17 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const goToWatchlist = () => {
+    navigate("/mylist")
+  }
+
   return (
-    <div className="px-4 md:px-30 py-5 bg-black bg-cover text-white z-10 relative min-h-[70vh] md:min-h-[80vh] flex items-center">
+    <div className="px-4 md:px-30 py-5 bg-black bg-cover text-white z-10 relative min-h-[80vh] md:min-h-[90vh] flex items-center">
       <div className="absolute inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url(${banner})` }}></div>
       
       <div className="relative z-10 w-full">
         <div className="flex justify-between items-center mb-8 md:mb-0">
-          <img className="h-10" src={netflixLogo} alt="Netflix Logo" />
+          <img className="h-10 cursor-pointer" src={netflixLogo} alt="Netflix Logo" onClick={() => navigate("/")} />
 
           <div className="flex items-center gap-2 md:gap-4">
             <select className="pr-8 md:pr-12 border p-1 md:mr-2 border-gray-500 bg-transparent text-sm md:text-base">
@@ -27,12 +31,20 @@ const Navbar = () => {
             </select>
 
             {currentUser && (
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 px-3 md:px-5 py-1 rounded text-sm md:text-base"
-              >
-                Sign Out
-              </button>
+              <>
+                <button
+                  onClick={goToWatchlist}
+                  className="bg-red-600 px-3 md:px-5 py-1 rounded text-sm md:text-base"
+                >
+                  My List
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-600 px-3 md:px-5 py-1 rounded text-sm md:text-base"
+                >
+                  Sign Out
+                </button>
+              </>
             )}
           </div>
         </div>

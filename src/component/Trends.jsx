@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import MovieModal from './Modal/MovieModal';
 
 const Trends = () => {
@@ -7,7 +7,7 @@ const Trends = () => {
     const [movies,setMovies] = useState([]);
     const [selectedMovieDetails, setSelectedMovieDetails] = useState(null);
 
-    const apiKey = "e236b171385b7ed624ab9c3f0a631824"
+    const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`)
@@ -18,12 +18,12 @@ const Trends = () => {
             .catch((error) => console.error("Error fetching trending movies: ",error));
     },[]);
 
-    const fetchMovieDetails = (movieId) => {
+    const fetchMovieDetails = ((movieId) => {
         fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&append_to_response=credits`)
             .then((res) => res.json())
             .then((data) => setSelectedMovieDetails(data))
             .catch((error) => console.error("Error fetching movie details: ",error));
-    }
+    })
 
     const handleMovieClick = (movieId) => {
         fetchMovieDetails(movieId);
